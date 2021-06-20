@@ -236,3 +236,212 @@ for i in range(1, n+1):
 word = int(input(), 16)
 for i in range(1, 16):
     print('%X*%X=%X' %(word, i, word*i))
+
+## 82. 369 게임
+number = int(input())
+
+for i in range(1, number+1):
+    if i % 10 == 3:
+        print("X", end=' ')
+    elif i % 10 == 6 :
+        print("X", end=' ')
+    elif i % 10 == 9:
+        print("X", end=' ')
+    else:
+        print(i, end=' ')
+
+## 83. 조합 수 구하기
+r, g, b = map(int, input().split())
+count = 0
+for i in range(r):
+    for j in range(g):
+        for k in range(b):
+            print(i, j, k, end=' ')
+            print()
+            count += 1
+print(count)
+
+## 84. 사운드파일 저장용량 계산하기
+h, b, c, s = map(int, input().split())
+byte = (h * b * c * s) / 8
+mb = (byte/1024)/1024
+print(f'{mb:.1f} MB')
+
+## 85. 이미지파일 저장용량 계산하기
+w, h, b = map(int, input().split())
+byte = (w * h * b) / 8
+mb = (byte/1024) / 1024
+print(f'{mb:.2f} MB')
+
+## 86. 입력값보다 커질 때까지 더하기
+subject = int(input())
+number = 0
+total = 0
+
+while True : 
+    total += number
+    number += 1
+    if total >= subject:
+        break
+    
+print(total)
+
+## 87. 3의 배수 출력하기
+number = int(input())
+
+for i in range(1, number+1):
+    if i % 3 == 0 :
+        continue
+    else:
+        print(i, end=' ')
+
+## 88. 등차수열
+a, d, n = map(int, input().split())
+total = a
+
+for i in range(0, n-1):
+    total += d
+print(total)
+
+## 89. 등비수열
+a, r, n = map(int, input().split())
+total = a
+
+for i in range(0, n-1):
+    total += r
+print(total)
+
+## 90. 수열
+a, m, d, n = map(int, input().split())
+total = a
+
+for _ in range(0, n-1):
+    total = (total * m) + d
+print(total)
+
+## 91. 다시 만나는 날 계산
+d1, d2, d3 = map(int, input().split())
+
+start = 1
+
+while start % d1 != 0 or start % d2 != 0 or start % d3 != 0 :
+    start += 1
+
+print(start)
+
+## 92. 리스트 활용 (1)
+total = int(input())
+num = [int(i) for i in input().split()]
+
+count = [0 for _ in range(24)]
+
+for i in range(total):
+    count[num[i]] += 1
+    
+for j in range(1, 24):
+    print(count[j], end=' ')
+
+## 93. 리스트 활용 (2)
+count = int(input())
+rand_num = [int(i) for i in input().split()]
+
+for i in range(count-1, -1, -1):
+    print(rand_num[i], end=' ')
+
+## 94. 리스트에서 최솟값 찾기
+count = int(input())
+rand_num = [int(i) for i in input().split()]
+
+print(min(rand_num))
+
+## 95. 2중 리스트 활용
+num = int(input())
+game = [[0 for _ in range(19)] for _ in range(19)]
+
+for _ in range(num):
+    x, y = map(int, input().split())
+    game[x-1][y-1] = 1
+
+for i in range(19):
+    for j in range(19):
+        print(game[i][j], end=' ')
+    print()
+
+## 96. 십자 뒤집기 게임
+game = [[]*19 for _ in range(19)]
+for i in range(19):
+    game[i] = list(map(int, input().split()))
+    
+num = int(input())
+
+for _ in range(num):
+    x, y = map(int, input().split())
+    
+    for i in range(19):
+        if game[x-1][i] == 1:
+            game[x-1][i] = 0
+        else:
+            game[x-1][i] = 1
+    
+    for j in range(19):
+        if game[j][y-1] == 1:
+            game[j][y-1] = 0
+        else:
+            game[j][y-1] = 1 
+            
+for i in range(19):
+    for j in range(19):
+        print(game[i][j], end=' ')
+    print()
+
+## 97. 설탕과자 뽑기 게임
+w, h = map(int, input().split())
+num = int(input())
+
+game = [[0 for _ in range(h)] for _ in range(w)]
+
+for i in range(num):
+    l, d, x, y = map(int, input().split())
+    if d == 0:
+        for j in range(l):
+            game[x-1][y-1] = 1
+            y += 1
+    else :
+        for j in range(l):
+            game[x-1][y-1] = 1
+            x += 1
+            
+for i in range(w):
+    for j in range(h):
+        print(game[i][j], end=' ')
+    print()
+
+## 98. 성실한 개미
+game = [[]*10 for _ in range(10)]
+for i in range(10):
+    game[i] = list(map(int, input().split()))
+    
+x, y = 1, 1
+game[x][y] = 9
+
+while True:
+    if game[x][y] == 2:  # 가장 먼저 확인해야함 => 먹이 지날칠 수 있으므로
+        game[x][y] = 9
+        break
+    
+    elif game[x][y+1] != 1: # 다음 좌표 == 0 으로 하면 먹이(2)를 지나치므로 !=1로 조건 제시
+        game[x][y] = 9
+        y += 1
+    
+    else:
+        if game[x+1][y] != 1:
+            game[x][y] = 9
+            x += 1
+        else:
+            game[x][y] = 9
+            break
+
+for i in range(10):
+    for j in range(10):
+        print(game[i][j], end=' ')
+    print()
