@@ -1,15 +1,14 @@
 n = int(input())
 x = list(map(int, input().split()))
 
-x.sort(reverse=True)
+x.sort()  ## 인원이 많은 그룹부터 생성 시 최댓값 불가
 group = 0
-total = len(x)
+member = 0
 
 for i in x:
-    if total < i:
-        break
-    else:
-        total -= i
-    group += 1
+    member += 1
+    if member >= i:
+        group += 1
+        member = 0
 
 print(group)
