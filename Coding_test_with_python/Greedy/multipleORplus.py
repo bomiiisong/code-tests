@@ -2,9 +2,10 @@ s = input()
 number = int(s[0])
 
 for i in range(1, len(s)):
-    if number < 2 :
-        number += int(s[i])
+    temp = int(s[i])
+    if number < 2 or temp < 2:
+        number += temp
     else:
-        number *= int(s[i])
+        number *= temp
 
 print(number)
